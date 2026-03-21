@@ -1,0 +1,27 @@
+<div class="flex items-end gap-2 max-w-[80%] animate-slide-in"
+     [class.ml-auto]="isUser()"
+     [class.flex-row-reverse]="isUser()">
+
+  <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm flex-shrink-0"
+       [class]="isUser() ? 'bg-blue-50' : 'bg-gradient-to-br from-indigo-400 to-purple-500'">
+    @switch (message().role) {
+      @case ('user')      { 👤 }
+      @case ('assistant') { ✈️ }
+    }
+  </div>
+
+  <div class="px-4 py-3 rounded-2xl"
+       [class]="isUser()
+         ? 'bg-blue-600 text-white rounded-br-sm'
+         : 'bg-white border border-slate-200 text-slate-900 rounded-bl-sm shadow-sm'">
+    @if (isEmpty()) {
+      <app-loading-dots />
+    } @else {
+      <p class="text-sm leading-relaxed whitespace-pre-wrap break-words m-0">
+        {{ message().content }}
+      </p>
+    }
+    <span class="block text-[11px] mt-1.5 opacity-60">{{ timestamp() }}</span>
+  </div>
+
+</div>
